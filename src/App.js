@@ -6,6 +6,7 @@ import Basket from "./pages/Basket";
 import Root from "./pages/Root";
 import NotFound from "./pages/NotFound";
 import ApiResponse from "./components/ApiResponse";
+import 'bootstrap/dist/css/bootstrap.min.css'
 function App() {
   return (
     <>
