@@ -9,6 +9,7 @@ function App() {
   return (
     <>
     <Routes>
+      <Route path="/api" element={<ApiResponse />} />
       <Route path="/" element={<Layout />}>
         <Route index element={<Catalog />} />
         <Route path="registration" element={<Registration />} />
