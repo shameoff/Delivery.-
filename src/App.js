@@ -5,6 +5,7 @@ import Registration from "./pages/Registration";
 import Basket from "./pages/Basket";
 import Catalog from "./pages/Catalog";
 import NotFound from "./pages/NotFound";
+import ApiResponse from "./components/ApiResponse";
 function App() {
   return (
     <>
