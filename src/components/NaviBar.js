@@ -5,18 +5,18 @@ import {Navbar, Nav, Button} from "react-bootstrap";
 function NaviBar(props) {
     return (
         <>
-            <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark'>
+            <Navbar collapseOnSelect expand='lg' bg='dark' variant='dark' className="rounded-2 ps-2 pe-2">
                 <Navbar.Brand>Delivery.Кушац</Navbar.Brand>
 
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                 <Navbar.Collapse id="responsive-navbar-nav">
-                    <Nav >
-                        <Nav.Link><Link to="/">Меню</Link></Nav.Link>
-                        <Nav.Link><Link to="/orders">Заказы</Link></Nav.Link>
-                        <Nav.Link><Link to="/basket">Корзина</Link></Nav.Link>
+                    <Nav>
+                        <Nav.Link href="/">Меню</Nav.Link>
+                        <Nav.Link href="/orders">Заказы</Nav.Link>
+                        <Nav.Link href="/basket">Корзина</Nav.Link>
                     </Nav>
                     <Nav className="ms-auto">
-                        <Nav.Link><Link to="/profile">Профиль</Link></Nav.Link>
+                        <Nav.Link href="/profile">Профиль</Nav.Link>
                         <Button variant='primary' className="ms-2 mb-1">Log In</Button>
                         <Button variant='primary' className="ms-2 mb-1">Sign In</Button>
                         <Button variant='primary' className="ms-2 mb-1">Log Out</Button>
