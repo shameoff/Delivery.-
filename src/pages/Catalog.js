@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import Dishes from "../components/Dishes";
 import Loader from "../components/Loader";
+import {Container} from "react-bootstrap";
 
 async function getDishList() {
     let URL = process.env.REACT_APP_API_URL
@@ -14,7 +15,7 @@ async function getDishList() {
 
 function Catalog(props) {
     const [dishes, setDishes] = useState([])
-    const [loaging, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         getDishList()
@@ -31,7 +32,7 @@ function Catalog(props) {
     }, [])
     return (
         <>
-            {loaging && <Loader/>}
+            {loading && <Loader/>}
             <Dishes items={dishes}></Dishes>
         </>
     )
