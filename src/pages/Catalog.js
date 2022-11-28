@@ -18,13 +18,18 @@ function Catalog(props) {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        document.title = "delivery.Кушац"
+    })
+
+    useEffect(() => {
         getDishList()
             .then((response) => {
-                // !!! ПОТОМ УБРАТЬ ТАЙМАУТ !!!
-                setTimeout(() => {
-                    setDishes(response.data.dishes)
-                    setLoading(false)
-                }, 2000)
+                // !!! Позволяет проверить, как крутится загрузка!!!
+                // setTimeout(() => {
+                //     setDishes(response.data.dishes)
+                //     setLoading(false)
+                // }, 2000)
+                setDishes(response.data.dishes)
             })
             .then(() => {
                 console.log(dishes) // Почему выводит пустой массив?

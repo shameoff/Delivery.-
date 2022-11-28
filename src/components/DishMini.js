@@ -1,18 +1,23 @@
-import React from "react";
+import React, {useState} from "react";
+import {Button, Card} from "react-bootstrap";
+import Loader from "./Loader";
 
-
-function DishMini(props){
+function DishMini(props) {
+    const [imgLoading, setImgLoading] = useState(true)
+    let isVegeterian = props.item["vegetarian"]
     return (
-        <div className='foodItem'>
-            <img src={props.item.image}/>
-            <h2>{props.item.name}</h2>
-            <p>Категория блюда - {props.item.category}</p>
-            <p>{props.item.description}</p>
-            <p>{props.item.price} &#8381;</p>
-            <p>isVegeterian? {`${props.item["vegetarian"]}`}</p>
-            <div className="add-to-basket">+</div>
-        </div>
-    )// Почему веганская ли еда показывается только таким костылем ??
+        <Card style={{width: "15rem", height: "20"}}>
+            <Card.Img variant="top" src={props.item.image}/>
+            {isVegeterian && <Card.ImgOverlay>VEGAN FOOD</Card.ImgOverlay>}
+            <Card.Body>
+                <Card.Title>{props.item.name}</Card.Title>
+                <Card.Subtitle>Категория: {props.item.category}</Card.Subtitle>
+                <Card.Text>{props.item.description}</Card.Text>
+                <p>{props.item.price} &#8381;</p>
+                <Button variant="outline-secondary">В корзину!</Button>
+            </Card.Body>
+        </Card>
+    )// Почему веганская ли еда показывается только таким костылем c кавычками??
 }
 
 export default DishMini
