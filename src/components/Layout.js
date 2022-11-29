@@ -6,9 +6,9 @@ import {Container} from "react-bootstrap";
 
 function Layout() {
     return (
-        <Container className="p-3">
+        <Container fluid className="p-3">
             <NaviBar/>
-
+            
             <Outlet/>
 
             <Footer/>
