@@ -8,7 +8,7 @@ function Layout() {
     return (
         <Container fluid className="p-3">
             <NaviBar/>
-            
+
             <Outlet/>
 
             <Footer/>
