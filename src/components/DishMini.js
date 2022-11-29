@@ -4,11 +4,11 @@ import Loader from "./Loader";
 
 function DishMini(props) {
     const [imgLoading, setImgLoading] = useState(true)
-    let isVegeterian = props.item["vegetarian"]
+    let isVegetarian = props.item["vegetarian"]
     return (
-        <Card style={{width: "15rem", height: "20"}}>
+        <Card style={{width: "15rem", height: "20", margin: "5px"}}>
             <Card.Img variant="top" src={props.item.image}/>
-            {isVegeterian && <Card.ImgOverlay>VEGAN FOOD</Card.ImgOverlay>}
+            {isVegetarian && <Card.ImgOverlay>VEGAN FOOD</Card.ImgOverlay>}
             <Card.Body>
                 <Card.Title>{props.item.name}</Card.Title>
                 <Card.Subtitle>Категория: {props.item.category}</Card.Subtitle>

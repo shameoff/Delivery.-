@@ -24,22 +24,19 @@ function Catalog(props) {
     useEffect(() => {
         getDishList()
             .then((response) => {
-                // !!! Позволяет проверить, как крутится загрузка!!!
-                // setTimeout(() => {
-                //     setDishes(response.data.dishes)
-                //     setLoading(false)
-                // }, 2000)
                 setDishes(response.data.dishes)
+                setLoading(false)
             })
             .then(() => {
                 console.log(dishes) // Почему выводит пустой массив?
             })
     }, [])
     return (
-        <>
+        <Container>
+            <h1>Каталог блюд</h1>
             {loading && <Loader/>}
             <Dishes items={dishes}></Dishes>
-        </>
+        </Container>
     )
 }
 

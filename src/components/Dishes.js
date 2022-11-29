@@ -4,7 +4,7 @@ import {Container} from "react-bootstrap";
 
 function Dishes(props) {
     return (
-        <Container xxl className="p-3 mt-3 bg-light rounded-3 d-flex justify-content-between">
+        <Container className="p-3 mt-3 bg-light rounded-3 d-flex flex-wrap">
             {props.items.map((item, key) => <DishMini item={item} key={key}/>)}
         </Container>
     )
