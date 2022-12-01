@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import Dishes from "../components/Dishes";
+import Dishes from "./catalog/Dishes";
 import Loader from "../components/Loader";
 import {Container} from "react-bootstrap";
 

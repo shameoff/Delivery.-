@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Button, Card} from "react-bootstrap";
-import Loader from "./Loader";
+import Loader from "../../components/Loader";
 import {Link} from "react-router-dom";
 import axios from "axios";
 

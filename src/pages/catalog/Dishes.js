@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import DishCard from "./DishCard";
 import {Container} from "react-bootstrap";
 import axios from "axios";
-import Loader from "./Loader";
+import Loader from "../../components/Loader";
 
 function getDishList() {
     let URL = process.env.REACT_APP_API_URL
