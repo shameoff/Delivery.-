@@ -1,17 +1,8 @@
 import React, {useEffect, useState} from "react";
-import axios from "axios";
-import Dishes from "../components/Dishes";
+import Dishes from "./catalog/Dishes";
 import Loader from "../components/Loader";
 import {Container} from "react-bootstrap";
-
-async function getDishList() {
-    let URL = process.env.REACT_APP_API_URL
-    return axios.get(`${URL}/api/dish`)
-        .catch(error => {
-            console.log(error)
-        })
-}
-
+import {getData} from "../logic/getData";
 
 function Catalog(props) {
     const [dishes, setDishes] = useState([])
@@ -22,24 +13,17 @@ function Catalog(props) {
     })
 
     useEffect(() => {
-        getDishList()
+        getData("/dish")
             .then((response) => {
-                // !!! Позволяет проверить, как крутится загрузка!!!
-                // setTimeout(() => {
-                //     setDishes(response.data.dishes)
-                //     setLoading(false)
-                // }, 2000)
                 setDishes(response.data.dishes)
-            })
-            .then(() => {
-                console.log(dishes) // Почему выводит пустой массив?
-            })
-    }, [])
+                setLoading(false)
+            })}, [])
     return (
-        <>
+        <Container>
+            <h1>Каталог блюд</h1>
             {loading && <Loader/>}
             <Dishes items={dishes}></Dishes>
-        </>
+        </Container>
     )
 }
 
