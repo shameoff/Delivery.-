@@ -3,14 +3,7 @@ import {Button, Container} from "react-bootstrap";
 import Loader from "./Loader";
 import {Link} from "react-router-dom";
 import axios from "axios";
-
-function getProfileInfo(id) {
-    let URL = process.env.REACT_APP_API_URL
-    return axios.get(`${URL}/api/account/profile`)
-        .catch(error => {
-            console.log(error)
-        })
-}
+import {getData, getPrivateData} from "../logic/getData";
 
 
 function ProfileCard(props) {
@@ -18,7 +11,7 @@ function ProfileCard(props) {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        getProfileInfo(props.id)
+        getPrivateData("/account/profile")
             .then((resp) => {
                 setProfileInfo(resp.data)
                 setLoading(false)

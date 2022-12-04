@@ -7,3 +7,17 @@ export function getData(URI) {
             console.log(error)
         })
 }
+
+export function getPrivateData(URI) {
+    let URL = process.env.REACT_APP_API_URL
+    let token = localStorage.getItem("token")
+    return axios.get(`${URL}/api${URI}`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
+}
