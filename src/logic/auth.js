@@ -1,12 +1,21 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 
-export function isRegistered(){
-    
+export function isRegistered() {
+
 }
 
-export function register(item){
+// export function register(item) {
+//     console.log(item)
+// }
+
+export function register(item) {
+    let URL = process.env.REACT_APP_API_URL
     console.log(item)
+    return axios.post(`${URL}/api/account/register`, item)
+        .catch(error => {
+            console.log(error)
+        })
 }
 
 export function useValidation(value, validations) {
@@ -35,8 +44,7 @@ export function useValidation(value, validations) {
     useEffect(() => {
         if (isEmpty || minLengthError || !isDigit) {
             setInputValid(false)
-        }
-        else {
+        } else {
             setInputValid(true)
         }
     }, [isEmpty, minLengthError, isDigit])
@@ -45,7 +53,8 @@ export function useValidation(value, validations) {
         isEmpty, minLengthError, isDigit, inputValid
     }
 }
-export function useInput(initialValue, validations){
+
+export function useInput(initialValue, validations) {
     const [value, setValue] = useState(initialValue)
     const [isDirty, setDirty] = useState(false)
     const valid = useValidation(value, validations)
