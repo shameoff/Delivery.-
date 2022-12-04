@@ -1,16 +1,17 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Route, Routes} from "react-router-dom";
-import Layout from "./components/Layout"
-import Registration from "./pages/Registration";
+import ApiResponse from "./components/ApiResponse";
 import Basket from "./pages/Basket";
 import Catalog from "./pages/Catalog";
-import NotFound from "./pages/NotFound";
-import ApiResponse from "./components/ApiResponse";
-import Profile from "./pages/Profile";
-import MyOrders from "./pages/MyOrders";
 import Dish from "./pages/Dish";
+import Layout from "./components/Layout"
+import Login from "./pages/Login";
+import MyOrders from "./pages/MyOrders";
+import NotFound from "./pages/NotFound";
 import Order from "./pages/Order";
+import Profile from "./pages/Profile";
+import Registration from "./pages/Registration";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                     <Route index element={<Catalog/>}/>
                     <Route path="basket" element={<Basket/>}/>
                     <Route path="dish/:id" element={<Dish/>}/>
+                    <Route path="login" element={<Login/>}/>
                     <Route path="menu" element={<Catalog/>}/>
                     <Route path="order/:id" element={<Order/>}/>
                     <Route path="orders" element={<MyOrders/>}/>
