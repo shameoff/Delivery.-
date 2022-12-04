@@ -1,6 +1,6 @@
 import React from "react";
-import {Button, Form, FormControl, FormLabel, FormSelect, FormText} from "react-bootstrap";
-import {useInput} from "../logic/auth";
+import {Button, Form, FormControl, FormLabel, FormSelect} from "react-bootstrap";
+import {useInput} from "../logic/inputs";
 import {register} from "../logic/auth";
 
 function RegistrationForm() {
@@ -19,13 +19,13 @@ function RegistrationForm() {
             <Form onSubmit={(event) => {
                 event.preventDefault()
                 register({
-                    fullName: fullName.value,
-                    gender: gender.value == "Мужчина" ? "Male" : "Female",
-                    phoneNumber: phoneNumber.value,
-                    birthDate: birthDate.value,
-                    address: address.value,
-                    email: email.value,
-                    password: password.value
+                    "fullName": fullName.value,
+                    "gender": gender.value === "Мужчина" ? "Male" : "Female",
+                    "phoneNumber": phoneNumber.value,
+                    "birthDate": birthDate.value,
+                    "address": address.value,
+                    "email": email.value,
+                    "password": password.value
                 })
             }}>
                 <Form.Group className="mb-3" controlId="formNameRegister">
@@ -44,13 +44,13 @@ function RegistrationForm() {
 
                 <Form.Group className="mb-3" controlId="formPhoneRegister">
                     <FormLabel>Телефон</FormLabel>
-                    <FormControl type="phoneNumber" onChange={e => phoneNumber.onChange(e)}
+                    <FormControl className="phoneNumber" type="tel" onChange={e => phoneNumber.onChange(e)}
                                  onBlur={e => phoneNumber.onBlur(e)} placeholder="+7 (xxx) xxx-xx-xx"/>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBirthDateRegister">
                     <FormLabel>Дата рождения</FormLabel>
-                    <FormControl type="birthDate" onChange={e => birthDate.onChange(e)}
+                    <FormControl type="date" onChange={e => birthDate.onChange(e)}
                                  onBlur={e => birthDate.onBlur(e)} placeholder="дд.мм.гггг"/>
                 </Form.Group>
 
