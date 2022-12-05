@@ -1,5 +1,4 @@
 import axios from "axios";
-import {useEffect} from "react";
 
 export function authorize(item) {
     let URL = process.env.REACT_APP_API_URL
@@ -9,5 +8,15 @@ export function authorize(item) {
         })
 }
 
+export function isRegistered() {
 
+}
 
+export function register(item) {
+    let URL = process.env.REACT_APP_API_URL
+    console.log(item)
+    return axios.post(`${URL}/api/account/register`, item)
+        .catch(error => {
+            console.log(error)
+        })
+}
