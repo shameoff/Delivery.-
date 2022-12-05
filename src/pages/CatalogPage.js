@@ -5,7 +5,7 @@ import {Container} from "react-bootstrap";
 import {getData} from "../logic/getData";
 import PaginationTool from "../components/PaginationTool";
 
-function Catalog(props) {
+function CatalogPage(props) {
 
     useEffect(() => {
         document.title = "delivery.Кушац"
@@ -22,4 +22,4 @@ function Catalog(props) {
     )
 }
 
-export default Catalog
+export default CatalogPage

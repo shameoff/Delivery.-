@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useParams} from "react-router-dom";
-import Loader from "./Loader";
+import Loader from "../../components/Loader";
 import {Container} from "react-bootstrap";
 import OrderCard from "./OrderCard";
 

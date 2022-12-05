@@ -1,35 +1,32 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Route, Routes} from "react-router-dom";
-import ApiResponse from "./components/ApiResponse";
-import Basket from "./pages/Basket";
-import Catalog from "./pages/Catalog";
-import Dish from "./pages/Dish";
+import BasketPage from "./pages/BasketPage";
+import CatalogPage from "./pages/CatalogPage";
+import DishPage from "./pages/DishPage";
 import Layout from "./components/Layout"
-import Login from "./pages/Login";
-import MyOrders from "./pages/MyOrders";
-import NotFound from "./pages/NotFound";
-import Order from "./pages/Order";
-import Orders from "./components/Orders";
-import Profile from "./pages/Profile";
-import Registration from "./pages/Registration";
+import Login from "./pages/LoginPage";
+import OrdersPage from "./pages/OrdersPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import OrderPage from "./pages/OrderPage";
+import ProfilePage from "./pages/ProfilePage";
+import RegistrationPage from "./pages/RegistrationPage";
 
 function App() {
     return (
         <>
             <Routes>
-                <Route path="/api" element={<ApiResponse/>}/>
                 <Route path="/" element={<Layout/>}>
-                    <Route index element={<Catalog/>}/>
-                    <Route path="basket" element={<Basket/>}/>
-                    <Route path="dish/:id" element={<Dish/>}/>
+                    <Route index element={<CatalogPage/>}/>
+                    <Route path="basket" element={<BasketPage/>}/>
+                    <Route path="dish/:id" element={<DishPage/>}/>
                     <Route path="login" element={<Login/>}/>
-                    <Route path="menu" element={<Catalog/>}/>
-                    <Route path="order/:id" element={<Order/>}/>
-                    <Route path="orders" element={<MyOrders/>}/>
-                    <Route path="profile" element={<Profile/>}/>
-                    <Route path="registration" element={<Registration/>}/>
-                    <Route path="*" element={<NotFound/>}/>
+                    <Route path="menu" element={<CatalogPage/>}/>
+                    <Route path="order/:id" element={<OrderPage/>}/>
+                    <Route path="orders" element={<OrdersPage/>}/>
+                    <Route path="profile" element={<ProfilePage/>}/>
+                    <Route path="registration" element={<RegistrationPage/>}/>
+                    <Route path="*" element={<NotFoundPage/>}/>
                 </Route>
             </Routes>
         </>

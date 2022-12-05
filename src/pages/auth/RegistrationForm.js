@@ -1,7 +1,7 @@
 import React from "react";
 import {Button, Form, FormControl, FormLabel, FormSelect} from "react-bootstrap";
-import {useInput} from "../logic/inputs";
-import {register} from "../logic/auth";
+import {useInput} from "../../logic/inputs";
+import {register} from "../../logic/auth";
 
 function RegistrationForm() {
 

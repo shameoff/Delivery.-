@@ -1,9 +1,9 @@
 import React from "react";
 
-function Basket(props){
+function BasketPage(props) {
     return (
         <>BASKET</>
     )
 }
 
-export default Basket;
+export default BasketPage;

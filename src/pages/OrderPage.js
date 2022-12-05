@@ -13,7 +13,7 @@ function getOrderInfo(id) {
 }
 
 
-function Order() {
+function OrderPage() {
     const params = useParams()
     const [orderInfo, setOrderInfo] = useState([])
     const [loading, setLoading] = useState(true)
@@ -36,4 +36,4 @@ function Order() {
     )
 }
 
-export default Order;
+export default OrderPage;

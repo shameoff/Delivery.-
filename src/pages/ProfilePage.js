@@ -1,8 +1,8 @@
 import React from "react";
-import ProfileCard from "../components/ProfileCard";
+import ProfileCard from "./profile/ProfileCard";
 import {Container} from "react-bootstrap";
 
-function Profile(props) {
+function ProfilePage(props) {
     return (
         <Container className="pt-5, mt-3 m-auto rounded-3 bg-light d-block align-content-center">
             <h1>Мой профиль: </h1>
@@ -11,4 +11,4 @@ function Profile(props) {
     )
 }
 
-export default Profile;
+export default ProfilePage;

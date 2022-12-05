@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {Container} from "react-bootstrap";
 import PaginationTool from "../components/PaginationTool";
-import Orders from "../components/Orders";
+import Orders from "./order/Orders";
 
-function MyOrders(props) {
+function OrdersPage(props) {
 
     useEffect(() => {
         document.title = "Заказы"
@@ -20,4 +20,4 @@ function MyOrders(props) {
     )
 }
 
-export default MyOrders
+export default OrdersPage
