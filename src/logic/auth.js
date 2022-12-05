@@ -1,15 +1,19 @@
 import axios from "axios";
 
-export function authorize(item) {
+export function authorize(email, password) {
     let URL = process.env.REACT_APP_API_URL
-    return axios.post(`${URL}/api/account/login`, item)
-        .catch(error => {
-            console.log(error.response.data)
+    return axios.post(`${URL}/api/account/login`, {
+        "email": email,
+        "password": password
+    }).catch(error => {
+        return new Promise((resolve, reject) => {
+            reject(error.response.data)
         })
+    })
 }
 
-export function isRegistered() {
-
+export function isAuthorized() {
+    return localStorage.getItem("token") ? true : false
 }
 
 export function register(item) {
@@ -19,4 +23,8 @@ export function register(item) {
         .catch(error => {
             console.log(error)
         })
+}
+
+export function fillModalWithError(error) {
+
 }

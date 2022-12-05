@@ -2,37 +2,60 @@ import {useEffect, useState} from "react";
 
 export function useValidation(value, validations) {
     const [isEmpty, setIsEmpty] = useState(true)
-    const [isDigit, setIsDigit] = useState(true)
+    const [isNotDigit, setIsNotDigit] = useState(false)
     const [minLengthError, setMingLengthError] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
+    const [isNotEmail, setIsNotEmail] = useState(false)
     const [inputValid, setInputValid] = useState(false)
-
     useEffect(() => {
         for (const validation in validations) {
             switch (validation) {
                 case "minLength":
-                    value.length < validations[validation] ? setMingLengthError(true) : setMingLengthError(false)
+                    if (value.length < validations[validation]) {
+                        setMingLengthError(true)
+                    } else {
+                        setMingLengthError(false)
+                        setErrorMessage(`Минимальная длина - ${validations[validation]} символов!`)
+                    }
                     break;
 
                 case "isEmpty":
-                    value ? setIsEmpty(false) : setIsEmpty(true)
+                    if (value) {
+                        setIsEmpty(false)
+                    } else {
+                        setIsEmpty(true)
+                        setErrorMessage("Поле не должно быть пустым!")
+                    }
                     break;
                 case "isDigit":
-                    /^\d+$/.test(value) ? setIsDigit(true) : setIsDigit(false)
+                    if (/^\d+$/.test(value)) {
+                        setIsNotDigit(true)
+                    } else {
+                        setIsNotDigit(false)
+                        setErrorMessage("Поле содержит не только цифры!!")
+                    }
+                    break;
+                case "isEmail":
+                    if (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)) {
+                        setIsNotEmail(true)
+                    } else {
+                        setIsNotEmail(false)
+                        setErrorMessage("Введенный текст не является email")
+                    }
             }
         }
     }, [value])
 
     useEffect(() => {
-        if (isEmpty || minLengthError || !isDigit) {
+        if (isEmpty || minLengthError || isNotDigit) {
             setInputValid(false)
         } else {
             setInputValid(true)
         }
-    }, [isEmpty, minLengthError, isDigit])
+    }, [isEmpty, minLengthError, isNotDigit, isNotEmail])
 
     return {
-        isEmpty, minLengthError, isDigit, inputValid
+        isEmpty, minLengthError, isDigit: isNotDigit, inputValid, errorMessage
     }
 }
 
@@ -41,6 +64,7 @@ export function useInput(initialValue, validations) {
     const [isDirty, setDirty] = useState(false)
     const valid = useValidation(value, validations)
     const onChange = (_event) => {
+        // Проверка на то, является ли данное поле телефонным номером
         if (_event.target.attributes.class.value.includes("phoneNumber")) {
             setValue(getNumbersOfInput(_event.target.value.toString()))
             maskPhoneNumber(_event)
@@ -62,6 +86,7 @@ function getNumbersOfInput(inputStr) {
 }
 
 function maskPhoneNumber(event) {
+    // В данной реализации есть баги с тем, что при удалении цифры из середины, можно писать любые символы
     let input = event.target
     let number = getNumbersOfInput(input.value.toString())
     let formattedResult = ""
@@ -72,7 +97,6 @@ function maskPhoneNumber(event) {
     }
 
     if (input.value.length !== selectionStart) {
-        console.log("Редактирование в середине")
         if (event.data && /\D/g.test(event.data)) {
             input.value = formattedResult
         }
