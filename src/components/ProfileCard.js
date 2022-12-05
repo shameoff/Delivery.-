@@ -1,16 +1,9 @@
 import React, {useEffect, useState} from "react";
-import {Button, Container} from "react-bootstrap";
+import {Button, Container, Form, FormControl, FormLabel, FormSelect} from "react-bootstrap";
 import Loader from "./Loader";
 import {Link} from "react-router-dom";
 import axios from "axios";
-
-function getProfileInfo(id) {
-    let URL = process.env.REACT_APP_API_URL
-    return axios.get(`${URL}/api/account/profile`)
-        .catch(error => {
-            console.log(error)
-        })
-}
+import {getData, getPrivateData} from "../logic/getData";
 
 
 function ProfileCard(props) {
@@ -18,7 +11,7 @@ function ProfileCard(props) {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        getProfileInfo(props.id)
+        getPrivateData("/account/profile")
             .then((resp) => {
                 setProfileInfo(resp.data)
                 setLoading(false)
@@ -29,7 +22,43 @@ function ProfileCard(props) {
         <>
             {loading && <Loader/>}
             <Container style={{margin: "5px"}}>
-                {profileInfo.fullName}
+                <Form disabled>
+
+                    <Form.Group className="mb-3" controlId="formProfileId">
+                        <FormLabel>ID</FormLabel>
+                        <FormControl type="profileId" placeholder={`${profileInfo.id}`}/>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formName">
+                        <FormLabel>ФИО</FormLabel>
+                        <FormControl type="fullName" placeholder={`${profileInfo.fullName}`}/>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formGender">
+                        <FormLabel>Пол</FormLabel>
+                        <FormSelect type="Gender" placeholder={`${profileInfo.gender}`}>
+                            <option>Мужчина</option>
+                            <option>Женщина</option>
+                        </FormSelect>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formPhone">
+                        <FormLabel>Телефон</FormLabel>
+                        <FormControl type="phoneNumber" placeholder={`${profileInfo.phoneNumber}`}/>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formBirthDate">
+                        <FormLabel>Дата рождения</FormLabel>
+                        <FormControl type="birthDate" placeholder={`${profileInfo.birthDate}`}/>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formAddress">
+                        <FormLabel>Адрес</FormLabel>
+                        <FormControl type="address" placeholder={`${profileInfo.address}`}/>
+                    </Form.Group>
+
+                    <Button variant="primary" type="submit">Изменить</Button>
+                </Form>
             </Container>
         </>
     )
