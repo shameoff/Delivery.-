@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import MyOrders from "./pages/MyOrders";
 import NotFound from "./pages/NotFound";
 import Order from "./pages/Order";
+import Orders from "./components/Orders";
 import Profile from "./pages/Profile";
 import Registration from "./pages/Registration";
 

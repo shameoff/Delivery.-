@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {useParams} from "react-router-dom";
+import Loader from "../components/Loader";
 
 
 function getOrderInfo(id) {
@@ -12,12 +13,26 @@ function getOrderInfo(id) {
 }
 
 
-function Order(props) {
+function Order() {
     const params = useParams()
+    const [orderInfo, setOrderInfo] = useState([])
+    const [loading, setLoading] = useState(true)
+
+
+    useEffect(() => {
+        getOrderInfo(params.orderId)
+            .then((resp) => {
+                setOrderInfo(resp.data)
+                setLoading(false)
+            })
+    }, [])
 
     return (
-
-        <>Order Page {params.orderId}</>
+        <>
+            {loading && <Loader/>}
+            {JSON.stringify(orderInfo)}
+            <>Order Page {params.orderId}</>
+        </>
     )
 }
 

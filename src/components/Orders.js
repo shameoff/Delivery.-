@@ -16,7 +16,6 @@ function getOrders(id) {
 
 
 function Orders(props) {
-    const params = useParams()
     const [orders, setOrders] = useState([])
     const [loading, setLoading] = useState(true)
 
