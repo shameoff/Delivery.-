@@ -1,10 +1,15 @@
 import axios from "axios";
+import qs from "qs";
 
 export function getData(URI, qparams = {}) {
     let URL = process.env.REACT_APP_API_URL
     return axios.get(`${URL}/api${URI}`, {
-        params: qparams
-    })
+            params: qparams,
+            paramsSerializer: {
+                indexes: null
+            }
+        }
+    )
         .catch(error => {
             console.log(error)
         })
@@ -13,12 +18,11 @@ export function getData(URI, qparams = {}) {
 export function getPrivateData(URI) {
     let URL = process.env.REACT_APP_API_URL
     let token = localStorage.getItem("token")
-    return axios.get(`${URL}/api${URI}`,
-        {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
+    return axios.get(`${URL}/api${URI}`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    })
         .catch(error => {
             console.log(error)
         })

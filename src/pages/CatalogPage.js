@@ -11,7 +11,7 @@ function CatalogPage(props) {
     })
 
     return (
-        <Container>
+        <Container className="mt-3">
             <h1>Каталог блюд</h1>
 
             <Dishes></Dishes>
