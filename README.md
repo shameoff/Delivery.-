@@ -2,6 +2,8 @@
 
 Frontend is built with react.js and react-bootstrap + bootstrap libs. 
 
+You should create .env with environments like in .env-example to use this frontend with other's backend 
+
 ### Available Scripts
 
 In the project directory, you can run:
