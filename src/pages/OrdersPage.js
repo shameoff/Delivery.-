@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {Container} from "react-bootstrap";
-import PaginationTool from "../components/PaginationTool";
 import Orders from "./order/Orders";
 
 function OrdersPage(props) {
@@ -15,7 +14,6 @@ function OrdersPage(props) {
 
             <Orders/>
 
-            <PaginationTool current="2"></PaginationTool>
         </Container>
     )
 }
