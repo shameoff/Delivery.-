@@ -17,7 +17,9 @@ export function getPrivateData(URI) {
                 Authorization: `Bearer ${token}`
             }
         })
-        .catch(error => {
-            console.log(error)
+        .catch((err) => {
+            return new Promise((resolve, reject) => {
+                reject (err.response)
+            })
         })
 }
