@@ -4,7 +4,9 @@ export function getData(URI) {
     let URL = process.env.REACT_APP_API_URL
     return axios.get(`${URL}/api${URI}`)
         .catch(error => {
-            console.log(error)
+            return new Promise((resolve, reject) => {
+                reject(error.response)
+            })
         })
 }
 
@@ -18,6 +20,8 @@ export function getPrivateData(URI) {
             }
         })
         .catch(error => {
-            console.log(error)
+            return new Promise((resolve, reject) => {
+                reject(error.response)
+            })
         })
 }

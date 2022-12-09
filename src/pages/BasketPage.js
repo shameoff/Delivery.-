@@ -12,7 +12,7 @@ function BasketPage(props) {
 
     return (
         <Container>
-            <h1>Корзина</h1>
+            <h1>Товары в корзине</h1>
 
             <Basket/>
 

@@ -3,6 +3,8 @@ import DishCard from "./DishCard";
 import {Container} from "react-bootstrap";
 import axios from "axios";
 import Loader from "../../components/Loader";
+import {getData, getPrivateData} from "../../logic/getData";
+import {useNavigate} from "react-router-dom";
 
 function getDishList() {
     let URL = process.env.REACT_APP_API_URL
@@ -16,6 +18,22 @@ function getDishList() {
 function Dishes(props) {
     const [dishes, setDishes] = useState([])
     const [loading, setLoading] = useState(true)
+    const [cartItems, setCartItems] = useState([])
+    const navigate = useNavigate()
+    useEffect(() => {
+        getPrivateData("/basket")
+            .then((resp) => {
+                setCartItems(resp.data)
+            })
+            .catch((error) => {
+                switch (error.status) {
+                    case "401":
+                        setCartItems([])
+                        break;
+                }
+            })
+    }, [])
+
 
     useEffect(() => {
         getDishList()
@@ -32,7 +50,7 @@ function Dishes(props) {
         <>
             {loading && <Loader/>}
             <Container className="p-3 mt-3 bg-light rounded-3 d-flex flex-wrap">
-                <>{dishes.map((item, key) => <DishCard item={item} key={key}/>)}</>
+                <>{dishes.map((item, key) => <DishCard item={item} cartItems={cartItems} key={key}/>)}</>
             </Container>
         </>
     )
