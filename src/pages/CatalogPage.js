@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Dishes from "./catalog/Dishes";
-import Loader from "../components/Loader";
 import {Container} from "react-bootstrap";
-import {getData} from "../logic/getData";
 
 function CatalogPage(props) {
 
@@ -14,7 +12,7 @@ function CatalogPage(props) {
         <Container className="mt-3">
             <h1>Каталог блюд</h1>
 
-            <Dishes></Dishes>
+            <Dishes searchParams={props.searchParams}></Dishes>
 
         </Container>
     )

@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import DishCard from "./DishCard";
 import {Container} from "react-bootstrap";
-import axios from "axios";
 import Loader from "../../components/Loader";
 import PaginationTool from "./PaginationTool";
 import {getData} from "../../logic/getData";
@@ -20,13 +19,13 @@ function Dishes(props) {
 
 
     useEffect(() => {
-        getData(`/dish`, params)
+        getData(`/dish?${props.searchParams.toString()}`, params)
             .then((response) => {
                 setDishes(response.data.dishes)
                 setPagination(response.data.pagination)
                 setLoading(false)
             })
-    }, [params])
+    }, [params, props.searchParams])
 
     return (
         <>
