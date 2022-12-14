@@ -1,6 +1,6 @@
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useSearchParams} from "react-router-dom";
 import BasketPage from "./pages/BasketPage";
 import CatalogPage from "./pages/CatalogPage";
 import DishPage from "./pages/DishPage";
@@ -13,15 +13,17 @@ import ProfilePage from "./pages/ProfilePage";
 import RegistrationPage from "./pages/RegistrationPage";
 
 function App() {
+
+    const [searchParams, setSearchParams] = useSearchParams()
     return (
         <>
             <Routes>
                 <Route path="/" element={<Layout/>}>
-                    <Route index element={<CatalogPage/>}/>
-                    <Route path="basket" element={<BasketPage/>}/>
+                    <Route index element={<CatalogPage searchParams={searchParams} setSearchParams={setSearchParams}/>}/>
+                    <Route path="cart" element={<BasketPage/>}/>
                     <Route path="dish/:id" element={<DishPage/>}/>
                     <Route path="login" element={<Login/>}/>
-                    <Route path="menu" element={<CatalogPage/>}/>
+                    <Route path="catalog" element={<CatalogPage searchParams={searchParams} setSearchParams={setSearchParams}/>}/>
                     <Route path="order/:id" element={<OrderPage/>}/>
                     <Route path="orders" element={<OrdersPage/>}/>
                     <Route path="profile" element={<ProfilePage/>}/>

@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Button, Container, Form, FormControl, FormLabel, FormSelect} from "react-bootstrap";
 import Loader from "../../components/Loader";
-import {Link} from "react-router-dom";
-import axios from "axios";
 import {getData, getPrivateData} from "../../logic/getData";
 
 

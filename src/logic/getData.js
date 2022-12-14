@@ -1,10 +1,18 @@
 import axios from "axios";
 
-export function getData(URI) {
+export function getData(URI, params = {}) {
     let URL = process.env.REACT_APP_API_URL
-    return axios.get(`${URL}/api${URI}`)
+    return axios.get(`${URL}/api${URI}`, {
+            params: params,
+            paramsSerializer: {
+                indexes: null
+            }
+        }
+    )
         .catch(error => {
-            console.log(error)
+            return new Promise((resolve, reject) => {
+                reject(error.response)
+            })
         })
 }
 
@@ -17,7 +25,9 @@ export function getPrivateData(URI) {
                 Authorization: `Bearer ${token}`
             }
         })
-        .catch(error => {
-            console.log(error)
+        .catch((err) => {
+            return new Promise((resolve, reject) => {
+                reject (err.response)
+            })
         })
 }

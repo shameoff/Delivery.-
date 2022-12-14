@@ -2,12 +2,10 @@ import React, {useEffect, useState} from "react";
 import {Button, Form} from "react-bootstrap";
 import {authorize} from "../../logic/auth";
 import {Link, useNavigate} from "react-router-dom";
-import {Modal} from "react-bootstrap";
 import ModalError from "../../components/ModalError";
 import {useInput} from "../../logic/inputs";
 
 function AuthorizationForm() {
-    const [token, setToken] = useState("")
     const email = useInput("", {isEmpty: true, isEmail: true})
     const password = useInput("", {isEmpty: true, minLength: 5})
     const navigate = useNavigate()
@@ -21,7 +19,6 @@ function AuthorizationForm() {
                 navigate("/")
             })
             .catch(error => {
-                // console.log(error["title"])
                 setError(error)
                 setShowModel(true)
             })
@@ -34,7 +31,6 @@ function AuthorizationForm() {
                 event.preventDefault()
                 onFormSubmit()
             })}>
-
                 <h1>Вход</h1>
                 <Form.Group className="mb-3" controlId="formEmailLogin">
                     <Form.Label>Email</Form.Label>
