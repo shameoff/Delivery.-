@@ -1,33 +1,27 @@
 import React, {useEffect, useState} from "react";
 import {Button, Form} from "react-bootstrap";
 import {authorize} from "../../logic/auth";
-import {Navigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 function AuthorizationForm() {
-    const [token, setToken] = useState()
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
-    useEffect(() => {
-        localStorage.setItem("token", token)
-    })
-    if (token) {
-        return (
-            <Navigate to="/"/>
-        )
+    const navigate = useNavigate()
+
+    function onFormSubmit(e) {
+        e.preventDefault()
+        authorize({
+            "email": email,
+            "password": password
+        })
+            .then((resp) => {
+                localStorage.setItem("token", resp.data.token)
+                navigate("/")
+            })
     }
     return (
         <>
-            <Form onSubmit={(event => {
-                event.preventDefault()
-                authorize({
-                    "email": email,
-                    "password": password
-                })
-                    .then((resp) => {
-                        setToken(resp.data["token"])
-                        console.log(token)
-                    })
-            })}>
+            <Form onSubmit={event => onFormSubmit(event)}>
 
                 <h1>Вход</h1>
                 <Form.Group className="mb-3" controlId="formEmailLogin">

@@ -13,7 +13,7 @@ function NaviBar(props) {
                     <Nav>
                         <Nav.Link href="/">Меню</Nav.Link>
                         <Nav.Link href="/orders">Заказы</Nav.Link>
-                        <Nav.Link href="/basket">Корзина</Nav.Link>
+                        <Nav.Link href="/cart">Корзина</Nav.Link>
                     </Nav>
                     <Nav className="ms-auto">
                         <Nav.Link href="/profile">Профиль</Nav.Link>

@@ -10,7 +10,9 @@ export function getData(URI, params = {}) {
         }
     )
         .catch(error => {
-            console.log(error)
+            return new Promise((resolve, reject) => {
+                reject(error.response)
+            })
         })
 }
 
@@ -23,6 +25,8 @@ export function getPrivateData(URI) {
         }
     })
         .catch(error => {
-            console.log(error)
+            return new Promise((resolve, reject) => {
+                reject(error.response)
+            })
         })
 }

@@ -8,10 +8,6 @@ export function authorize(item) {
         })
 }
 
-export function isRegistered() {
-
-}
-
 export function register(item) {
     let URL = process.env.REACT_APP_API_URL
     console.log(item)
