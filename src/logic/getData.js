@@ -19,14 +19,15 @@ export function getData(URI, params = {}) {
 export function getPrivateData(URI) {
     let URL = process.env.REACT_APP_API_URL
     let token = localStorage.getItem("token")
-    return axios.get(`${URL}/api${URI}`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
-        .catch(error => {
+    return axios.get(`${URL}/api${URI}`,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .catch((err) => {
             return new Promise((resolve, reject) => {
-                reject(error.response)
+                reject (err.response)
             })
         })
 }
