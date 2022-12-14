@@ -19,11 +19,11 @@ function App() {
         <>
             <Routes>
                 <Route path="/" element={<Layout/>}>
-                    <Route index element={<CatalogPage searchParams={searchParams}/>}/>
+                    <Route index element={<CatalogPage searchParams={searchParams} setSearchParams={setSearchParams}/>}/>
                     <Route path="basket" element={<BasketPage/>}/>
                     <Route path="dish/:id" element={<DishPage/>}/>
                     <Route path="login" element={<Login/>}/>
-                    <Route path="catalog" element={<CatalogPage searchParams={searchParams}/>}/>
+                    <Route path="catalog" element={<CatalogPage searchParams={searchParams} setSearchParams={setSearchParams}/>}/>
                     <Route path="order/:id" element={<OrderPage/>}/>
                     <Route path="orders" element={<OrdersPage/>}/>
                     <Route path="profile" element={<ProfilePage/>}/>

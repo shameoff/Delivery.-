@@ -12,7 +12,7 @@ function CatalogPage(props) {
         <Container className="mt-3">
             <h1>Каталог блюд</h1>
 
-            <Dishes searchParams={props.searchParams}></Dishes>
+            <Dishes searchParams={props.searchParams} setSearchParams={props.setSearchParams}></Dishes>
 
         </Container>
     )

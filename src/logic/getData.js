@@ -1,10 +1,9 @@
 import axios from "axios";
-import qs from "qs";
 
-export function getData(URI, qparams = {}) {
+export function getData(URI, params = {}) {
     let URL = process.env.REACT_APP_API_URL
     return axios.get(`${URL}/api${URI}`, {
-            params: qparams,
+            params: params,
             paramsSerializer: {
                 indexes: null
             }
