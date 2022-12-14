@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {addToCart, deleteFromCart} from "../../logic/order";
 import {Link, useNavigate} from "react-router-dom";
-import {Button, Card} from "react-bootstrap";
+import {Button, Card, Container} from "react-bootstrap";
 
 
 export function PositionCard(props) {
@@ -14,7 +14,6 @@ export function PositionCard(props) {
     function onAdd(e) {
         addToCart(props.item.id)
             .catch((error) => {
-                console.log("DELETE")
                 switch (error.status) {
                     case 401:
                         navigate("/login")
@@ -36,7 +35,7 @@ export function PositionCard(props) {
                 }
             })
             .then(() => {
-                if (!increase){
+                if (!increase) {
                     setValue(0)
                     reloadPage()
                 } else {
@@ -48,24 +47,24 @@ export function PositionCard(props) {
 
 
     return (
-        <div className="w-100 h-25 m-1">
-            <div className="d-flex justify-content-between m-1">
-                <div className=""> {/* Тут дисплей флекс вроде нужен*/}
-                    <div className="m-1"><img src={item.image} width="15%" className="rounded"/></div>
+        <Container
+            className="border border-2 h-25 m-1 p-2 d-flex justify-content-between align-items-center flex-wrap flex-md-nowrap">
+            <div className="d-flex flex-md-row flex-column">
+                <div className="m-1 col-md-4"><img src={item.image} width="100%" className="rounded"/></div>
+                <div>
                     <div>
-                        <div>
-                            <Link to={`/dish/${item.id}`}>{item.name}</Link>
-                            <div className="d-inline-flex m-1">
-                                <Button onClick={event => onDelete(event, true)} className="w-auto">-</Button>
-                                <p className="m-2">{value}</p>
-                                <Button onClick={event => onAdd(event)} className="w-auto">+</Button>
-                            </div>
+                        <Link to={`/dish/${item.id}`} className="text-decoration-none display-6">{item.name}</Link>
+                        <div className="d-inline-flex m-1">
+                            <Button onClick={event => onDelete(event, true)} className="w-auto">-</Button>
+                            <p className="m-2">{value}</p>
+                            <Button onClick={event => onAdd(event)} className="w-auto">+</Button>
                         </div>
-                        <div><p>Цена за шт: {item.price} &#8381;</p></div>
                     </div>
+                    <div><p>Цена за шт: {item.price} &#8381;</p></div>
                 </div>
-                <Button variant="danger" onClick={e => onDelete(e, false)}>Удалить</Button>
             </div>
-        </div>
+
+            <Button className="m-2" variant="danger" onClick={e => onDelete(e, false)}>Удалить</Button>
+        </Container>
     )
 }

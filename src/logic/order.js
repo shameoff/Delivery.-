@@ -35,11 +35,14 @@ export function addToCart(id) {
         )
 }
 
-export function order() {
+export function order(deliveryTime, address) {
     let URL = process.env.REACT_APP_API_URL
     let token = localStorage.getItem("token")
     return axios.post(`${URL}/api/order`,
-        {},{
+        {
+            deliveryTime: deliveryTime,
+            address: address
+        },{
             headers: {
                 Authorization: `Bearer ${token}`
             }

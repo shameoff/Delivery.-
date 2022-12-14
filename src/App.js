@@ -18,7 +18,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Layout/>}>
                     <Route index element={<CatalogPage/>}/>
-                    <Route path="basket" element={<BasketPage/>}/>
+                    <Route path="cart" element={<BasketPage/>}/>
                     <Route path="dish/:id" element={<DishPage/>}/>
                     <Route path="login" element={<Login/>}/>
                     <Route path="menu" element={<CatalogPage/>}/>
