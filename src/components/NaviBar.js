@@ -34,7 +34,7 @@ function NaviBar(props) {
                 }
             })
             .then(resp => {
-                setBasketAmount(resp.data.map(item => item.amount).reduce((prev, next) => prev + next))
+                setBasketAmount(resp.data.map(item => item.amount).reduce((prev, next) => prev + next, 0))
             })
     }, [])
 
@@ -49,7 +49,7 @@ function NaviBar(props) {
                         <Nav.Link as={Link} to="/orders">Заказы</Nav.Link>
                         <Nav.Link as={Link} to="/cart">
                             <div className="d-flex flex-row">Корзина &nbsp;
-                                {basketAmount && <div className="bg-success w-auto rounded">{` ${basketAmount} `}</div>}
+                                {basketAmount > 0 && <div className="bg-success w-auto rounded">{` ${basketAmount} `}</div>}
                             </div>
                         </Nav.Link>
                     </Nav>

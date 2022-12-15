@@ -7,7 +7,7 @@ import {getData, getPrivateData} from "../../logic/getData";
 function ProfileCard(props) {
     const [profileInfo, setProfileInfo] = useState([])
     const [loading, setLoading] = useState(true)
-
+    const [formEnabled, setFormEnabled] = useState(false)
     useEffect(() => {
         getPrivateData("/account/profile")
             .then((resp) => {
@@ -19,44 +19,35 @@ function ProfileCard(props) {
     return (
         <>
             {loading && <Loader/>}
-            <Container style={{margin: "5px"}}>
-                <Form disabled>
+            <Container className="d-flex">
+                <Container className="d-block w-25 row">
+                    <div className="display-6 col">ФИО</div>
 
-                    <Form.Group className="mb-3" controlId="formProfileId">
-                        <FormLabel>ID</FormLabel>
-                        <FormControl type="profileId" placeholder={`${profileInfo.id}`}/>
-                    </Form.Group>
+                    <div className="display-6 col">Email</div>
 
-                    <Form.Group className="mb-3" controlId="formName">
-                        <FormLabel>ФИО</FormLabel>
-                        <FormControl type="fullName" placeholder={`${profileInfo.fullName}`}/>
-                    </Form.Group>
+                    <div className="display-6 col">День рождения</div>
 
-                    <Form.Group className="mb-3" controlId="formGender">
-                        <FormLabel>Пол</FormLabel>
-                        <FormSelect type="Gender" placeholder={`${profileInfo.gender}`}>
+                    <div className="display-6 col">Пол</div>
+
+                    <div className="display-6 col">Адрес</div>
+
+                    <div className="display-6 col">Телефон</div>
+                </Container>
+                <Container className="row">
+                    <div className="col mt-3"><input disabled={!formEnabled} className="form-control" type="text" placeholder={`${profileInfo.fullName}`}/></div>
+                    <div className="col mt-3">{`${(profileInfo.birthDate)}`}</div>
+                    <div className="col mt-3">
+                        <select disabled={!formEnabled} className="form-select" placeholder={`${profileInfo.gender}`}>
                             <option>Мужчина</option>
                             <option>Женщина</option>
-                        </FormSelect>
-                    </Form.Group>
+                        </select>
+                    </div>
+                    <div className="col mt-3">{`${profileInfo.email}`}</div>
+                    <div className="col mt-3"><input disabled={!formEnabled} className="form-control" type="text" placeholder={`${profileInfo.address}`}/></div>
+                    <div className="col mt-3"><input disabled={!formEnabled} className="form-control" type="text" placeholder={`${profileInfo.phoneNumber}`}/></div>
 
-                    <Form.Group className="mb-3" controlId="formPhone">
-                        <FormLabel>Телефон</FormLabel>
-                        <FormControl type="phoneNumber" placeholder={`${profileInfo.phoneNumber}`}/>
-                    </Form.Group>
+                </Container>
 
-                    <Form.Group className="mb-3" controlId="formBirthDate">
-                        <FormLabel>Дата рождения</FormLabel>
-                        <FormControl type="birthDate" placeholder={`${profileInfo.birthDate}`}/>
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="formAddress">
-                        <FormLabel>Адрес</FormLabel>
-                        <FormControl type="address" placeholder={`${profileInfo.address}`}/>
-                    </Form.Group>
-
-                    <Button variant="primary" type="submit">Изменить</Button>
-                </Form>
             </Container>
         </>
     )

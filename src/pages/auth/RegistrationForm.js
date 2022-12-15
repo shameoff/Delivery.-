@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Form, FormControl, FormLabel, FormSelect} from "react-bootstrap";
+import {Button, Container, Form, FormControl, FormLabel, FormSelect} from "react-bootstrap";
 import {useInput} from "../../logic/inputs";
 import {register} from "../../logic/auth";
 
@@ -7,14 +7,14 @@ function RegistrationForm() {
 
     const fullName = useInput("",)
     const gender = useInput("")
-    const phoneNumber = useInput("", {isDigit: false, isEmpty: true})
+    const phoneNumber = useInput("", {isDigit: true, isNotEmpty: true})
     const birthDate = useInput("")
     const address = useInput("")
-    const email = useInput("", {isEmpty: true, minLength: 3})
-    const password = useInput("", {isEmpty: true, minLength: 5})
+    const email = useInput("", {isNotEmpty: true, minLength: 3, isEmail: true})
+    const password = useInput("", {isNotEmpty: true, minLength: 5})
 
     return (
-        <>
+        <Container className="p-2">
             <h1>Регистрация нового пользователя</h1>
             <Form onSubmit={(event) => {
                 event.preventDefault()
@@ -44,8 +44,12 @@ function RegistrationForm() {
 
                 <Form.Group className="mb-3" controlId="formPhoneRegister">
                     <FormLabel>Телефон</FormLabel>
-                    <FormControl className="phoneNumber" type="tel" onChange={e => phoneNumber.onChange(e)}
+                    <FormControl className="phoneNumber" type="tel"
+                                 onChange={e => {phoneNumber.onChange(e)}}
                                  onBlur={e => phoneNumber.onBlur(e)} placeholder="+7 (xxx) xxx-xx-xx"/>
+                    <Form.Text className="text-muted">
+                        {(phoneNumber.isDirty && !phoneNumber.inputValid) && "Некорректный номер телефона!"}
+                    </Form.Text>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBirthDateRegister">
@@ -65,7 +69,7 @@ function RegistrationForm() {
                     <Form.Control type="email" onChange={e => email.onChange(e)} onBlur={e => email.onBlur(e)}
                                   placeholder="Введите адрес электронной почты"/>
                     <Form.Text className="text-muted">
-                        {!(email.isDirty && email.isEmpty) ? "Email вы будете использовать как логин при входе в систему" : "Поле не должно быть пустым!"}
+                        {!(email.inputValid) ? "Поле не должно быть пустым!" : "Email вы будете использовать как логин при входе в систему"}
                     </Form.Text>
                 </Form.Group>
 
@@ -73,12 +77,15 @@ function RegistrationForm() {
                     <Form.Label>Пароль</Form.Label>
                     <Form.Control type="password" onChange={e => password.onChange(e)} onBlur={e => password.onBlur(e)}
                                   placeholder="Придумайте и введите пароль"/>
+                    <Form.Text className="text-muted">
+                        {password.isDirty && !password.inputValid ? "Некорректный пароль" : ""}
+                    </Form.Text>
                 </Form.Group>
 
                 <Button variant="primary" type="submit"
                         disabled={!email.inputValid || !password.inputValid || !phoneNumber.inputValid}>Зарегистрироваться!</Button>
             </Form>
-        </>
+        </Container>
     )
 }
 

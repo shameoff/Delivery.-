@@ -1,21 +1,24 @@
 import React, {useState} from "react";
 import {Button, Card} from "react-bootstrap";
-import Loader from "../../components/Loader";
 import {Link} from "react-router-dom";
-import axios from "axios";
+import {confirmOrderDelivery} from "../../logic/order";
 
 function OrderCard(props) {
-    let LinkToDetails = `/orders/${props.item.id}`
     return (
-        <Card style={{width: "15rem", height: "20", margin: "5px"}}>
-            <Card.Img variant="top" src={props.item.image}/>
-            <Card.Body>
-                <Card.Title><Link to={LinkToDetails}>{props.item.name}</Link></Card.Title>
-                <Card.Subtitle>Подзаголовок </Card.Subtitle>
-                <Card.Text>{props.item.description}</Card.Text>
-                <p> Стоимость в рублях: &#8381;</p>
-            </Card.Body>
-        </Card>
+        <div className="d-flex justify-content-between mb-2 rounded border border-2">
+            <div className="d-block m-2">
+                <Link to={`/order/${props.item.id}`}>Заказ #{props.item.id}</Link>
+                <div>Статус заказа - {props.item.status === "InProcess" ? "в обработке" : "доставлен"}</div>
+                <div>{props.item.status === "InProcess" ?
+                    `Доставка ожидается ${props.item.deliveryTime}` :
+                    `Заказ доставлен ${props.item.deliveryTime}`}
+                </div>
+            </div>
+            <div className="d-block m-2">
+                {props.item.status === "InProcess" && <Button variant="success" onClick={event => confirmOrderDelivery(props.item.id)}>Подтвердить доставку</Button>}
+                <div className="d-flex justify-content-around"><p className="fw-bold">Стоимость заказа:</p>{props.item.price}</div>
+            </div>
+        </div>
     )
 }
 

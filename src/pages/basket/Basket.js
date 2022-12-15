@@ -23,8 +23,8 @@ export function Basket(props) {
     const [basketData, setBasketData] = useState([])
     const [loading, setLoading] = useState(true)
     const navigate = useNavigate()
-    const address = useInput("", {isEmpty: false})
-    const deliveryTime = useInput(toIsoString(currentTime), {isEmpty: false})
+    const address = useInput("", {isNotEmpty: true, minLength: 6})
+    const deliveryTime = useInput(toIsoString(currentTime), {isNotEmpty: true})
 
 
     function loadItems() {
@@ -44,7 +44,6 @@ export function Basket(props) {
     }
 
     function createOrder() {
-        console.log(deliveryTime.value, address.value)
         order(deliveryTime.value, address.value)
             .then((resp) => {
                 navigate("/orders")

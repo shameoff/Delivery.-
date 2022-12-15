@@ -1,12 +1,12 @@
 import React from "react";
 import {useParams} from "react-router-dom";
+import {Dish} from "./catalog/Dish";
 
 
 function DishPage(props) {
-    const params = useParams()
 
     return (
-        <>Dish Page {params.orderId}</>
+        <Dish></Dish>
     )
 }
 

@@ -1,45 +1,47 @@
 import {useEffect, useState} from "react";
 
 export function useValidation(value, validations) {
-    const [isEmpty, setIsEmpty] = useState(true)
-    const [isNotDigit, setIsNotDigit] = useState(false)
-    const [minLengthError, setMingLengthError] = useState(false)
+    const [isNotEmpty, setIsNotEmpty] = useState(false)
+    const [isDigit, setIsDigit] = useState(true)
+    const [correctLength, setCorrectLength] = useState(true)
+    const [isEmail, setIsEmail] = useState(true)
     const [errorMessage, setErrorMessage] = useState("")
-    const [isNotEmail, setIsNotEmail] = useState(false)
     const [inputValid, setInputValid] = useState(false)
+
     useEffect(() => {
         for (const validation in validations) {
             switch (validation) {
-                case "minLength":
-                    if (value.length < validations[validation]) {
-                        setMingLengthError(true)
+                case "isNotEmpty":
+                    if (value) {
+                        setIsNotEmpty(true)
                     } else {
-                        setMingLengthError(false)
+                        setIsNotEmpty(false)
+                        setErrorMessage("Поле не должно быть пустым!")
+                    }
+                    break;
+
+                case "minLength":
+                    if (value.length >= validations[validation]) {
+                        setCorrectLength(true)
+                    } else {
+                        setCorrectLength(false)
                         setErrorMessage(`Минимальная длина - ${validations[validation]} символов!`)
                     }
                     break;
 
-                case "isEmpty":
-                    if (value) {
-                        setIsEmpty(false)
-                    } else {
-                        setIsEmpty(true)
-                        setErrorMessage("Поле не должно быть пустым!")
-                    }
-                    break;
                 case "isDigit":
                     if (/^\d+$/.test(value)) {
-                        setIsNotDigit(true)
+                        setIsDigit(true)
                     } else {
-                        setIsNotDigit(false)
+                        setIsDigit(false)
                         setErrorMessage("Поле содержит не только цифры!!")
                     }
                     break;
                 case "isEmail":
                     if (/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)) {
-                        setIsNotEmail(true)
+                        setIsEmail(true)
                     } else {
-                        setIsNotEmail(false)
+                        setIsEmail(false)
                         setErrorMessage("Введенный текст не является email")
                     }
             }
@@ -47,15 +49,15 @@ export function useValidation(value, validations) {
     }, [value])
 
     useEffect(() => {
-        if (isEmpty || minLengthError || isNotDigit) {
-            setInputValid(false)
-        } else {
+        if (isNotEmpty && correctLength && isDigit && isEmail) {
             setInputValid(true)
+        } else {
+            setInputValid(false)
         }
-    }, [isEmpty, minLengthError, isNotDigit, isNotEmail])
+    }, [isNotEmpty, correctLength, isDigit, isEmail])
 
     return {
-        isEmpty, minLengthError, isDigit: isNotDigit, inputValid, errorMessage
+        isNotEmpty, correctLength, isDigit, inputValid, errorMessage
     }
 }
 
