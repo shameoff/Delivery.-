@@ -42,3 +42,19 @@ export function logout() {
             localStorage.removeItem("token")
         })
 }
+
+export function editProfileInfo(item) {
+    let URL = process.env.REACT_APP_API_URL
+    let token = localStorage.getItem("token")
+    return axios.post(`${URL}/api/account/edit`, {item},
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        .catch(error => {
+            return new Promise((resolve, reject) => {
+                reject(error.response)
+            })
+        })
+}

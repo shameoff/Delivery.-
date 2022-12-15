@@ -50,7 +50,7 @@ function DishCard(props) {
             <Card.Body>
                 <Card.Title><Link to={`/dish/${item.id}`}>{item.name}</Link></Card.Title>
                 <Card.Subtitle>Категория: {item.category}</Card.Subtitle>
-                <Card.Subtitle>Рейтинг: {item.rating}</Card.Subtitle>
+                <Card.Subtitle>Рейтинг: {item.rating.toFixed(3)}</Card.Subtitle>
                 <Card.Text>{item.description}</Card.Text>
                 <div className="d-flex justify-content-between align-items-center m-1">
                     <h4>{item.price} &#8381;</h4>
